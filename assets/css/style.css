@@ -1,0 +1,1352 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  /* color: aliceblue; */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* ==========================================
+   DROPDOWN DESKTOP (PC) - EFEITO HOVER E ROLETA
+   ========================================== */
+@media (min-width: 770px) {
+  /* 1. O SEGREDO DA ÂNCORA: Prende o submenu para não voar pela tela */
+  .dropdown,
+  .dropdown-header {
+    position: relative;
+  }
+
+  /* 2. Prepara a caixa do submenu */
+  .dropdown-content {
+    display: none !important; /* Esconde à força quando o mouse tá fora */
+    position: absolute;
+    top: 100%; /* Gruda a caixa extamente abaixo da palavra "Expedições" */
+    left: 0;
+    background-color: #000;
+    min-width: 250px;
+    padding: 10px 0;
+    z-index: 999;
+    border: 1px solid #333;
+  }
+
+  /* 3. A FORÇA BRUTA: Mostra a caixa quando o mouse passa por cima */
+  .dropdown:hover .dropdown-content,
+  .dropdown-header:hover .dropdown-content {
+    display: flex !important; /* O !important destrói qualquer regra que tente esconder o menu */
+    flex-direction: column;
+  }
+
+  /* 3. Estilo dos links lá dentro no PC */
+  .dropdown-content a {
+    padding: 12px 20px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #222; /* Fica cinza quando passa o mouse na opção */
+    color: #00d2ff; /* Fica ciano */
+  }
+
+  /* 4. O Efeito roleta na setinha */
+  .dropbtn .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease; /* Deixa o giro suave */
+    margin-left: 8px; /* Dá um espacinho da palavra */
+  }
+
+  /* Gira a setinha quando o mouse passa por cima do menu */
+  .dropdown:hover .dropbtn .arrow,
+  .dropdown-header:hover .dropbtn .arrow {
+    transform: rotate(225deg);
+  }
+}
+
+/* ==========================================
+   1. ESCONDER CHECKBOXES PARA SEMPRE (PC e Mobile)
+   ========================================== */
+/* A caixinha feia do sistema nunca deve aparecer em tela nenhuma */
+.menu-checkbox,
+.submenu-checkbox {
+  display: none !important;
+}
+
+/* ==========================================
+   2. ESCONDER DESENHOS APENAS NO DESKTOP (PC)
+   ========================================== */
+/* As 3 barrinhas e a setinha somem em telas grandes */
+@media (min-width: 769px) {
+  .menu-hamburguer,
+  .submenu-seta {
+    display: none !important;
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Empurra os 3 blocos para as extremidades */
+  padding: 5px 5%; /* Cria o recuo lateral que o modelo tem */
+  background-color: #000; /* Garante o fundo preto puro */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Para garantir que o menu fique REALMENTE no centro */
+.nav-header {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.list-header {
+  display: flex;
+  gap: 30px; /* Aumentei o espaço entre os links como no modelo */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-transform: uppercase; /* O modelo usa muito caixa alta */
+  letter-spacing: 2px;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #2ed3f6;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.icon-svg {
+  fill: #ffffff; /* Cor branca para os ícones */
+  transition: fill 0.3s ease;
+  width: 20px;
+  height: 20px;
+}
+
+.social-links a:hover .icon-svg {
+  fill: #2ed3f6; /* Cor de destaque no hover (ex: verde menta) */
+}
+
+/* --- CONFIGURAÇÃO DO MENU DROPDOWN --- */
+
+/* 1. O "Pai" do menu (Item da lista) */
+.dropdown {
+  position: relative; /* Importante: segura o menu filho preso a ele */
+  display: inline-block;
+}
+
+/* 2. O Menu "Filho" (A caixinha que abre) */
+.dropdown-content {
+  display: none; /* ESCONDIDO POR PADRÃO */
+  position: absolute; /* Flutua por cima de tudo */
+  background-color: #000; /* Fundo preto igual ao site */
+  min-width: 200px; /* Largura mínima para caber o texto */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8); /* Sombra para destacar */
+  z-index: 1000; /* Garante que fique na frente das fotos do site */
+  top: 100%; /* Cola exatamente embaixo do botão */
+  left: 0;
+  padding: 10px 0;
+  border: 1px solid #333; /* Bordinha sutil para separar do fundo */
+}
+
+/* Estilo dos links dentro do dropdown */
+.dropdown-content li {
+  display: block;
+  margin: 0;
+}
+
+.dropdown-content li a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: 0.3s;
+  font-size: 0.9rem; /* Um pouco menor que o menu principal */
+}
+
+/* Efeito ao passar o mouse nos itens internos */
+.dropdown-content li a:hover {
+  background-color: #111;
+  color: #00adef; /* Seu azul ciano ou verde */
+  padding-left: 20px; /* Efeitinho de "andar" para a direita */
+}
+
+/* --- A MÁGICA DE APARECER --- */
+/* Quando passar o mouse no PAI (.dropdown), mostra o FILHO (.dropdown-content) */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#content-dropdown {
+  top: auto;
+  bottom: 100%;
+}
+
+/* --- A SETINHA (ARROW) --- */
+.arrow {
+  border: solid white;
+  border-width: 0 2px 2px 0; /* Desenha um "L" */
+  display: inline-block;
+  padding: 3px;
+  margin-left: 8px; /* Espaço entre o texto e a seta */
+  margin-bottom: 2px;
+
+  /* Faz o "L" girar 45 graus para virar uma seta pra baixo */
+  transform: rotate(45deg);
+  transition: transform 0.3s ease; /* Animação suave */
+}
+
+/* --- GIRAR A SETINHA --- */
+/* Quando passar o mouse no PAI, gira a seta para CIMA (-135 graus) */
+.dropdown:hover .arrow {
+  transform: rotate(-135deg);
+  border-color: #00adef; /* A seta também muda de cor se quiser */
+}
+
+.social-links a:hover img {
+  opacity: 0.7;
+}
+
+.hero {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.btn-cta {
+  padding: 1rem;
+  margin-top: 2.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2rem;
+  background-color: #000000;
+  border-radius: 5px;
+  border-color: #2ed3f6;
+  color: #2ed3f6;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: 0.3s;
+}
+
+.btn-cta:hover {
+  background-color: #2ed3f6;
+  color: #000;
+}
+
+#button-cta {
+  font-size: 1.2rem;
+}
+
+.gallery-grid {
+  margin-top: 5rem; /* Aumentei um pouco para o desnível não bater no título */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+  gap: 30px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  padding: 0;
+  transition: transform 0.4s ease; /* Efeito suave ao carregar ou dar hover */
+}
+
+/* O SEGREDO DO DESNÍVEL: Seleciona o segundo item (o do meio) */
+.gallery-grid figure:nth-child(2) {
+  transform: translateY(-50px); /* Move 50px para cima */
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 500px; /* Altura fixa para manter o padrão do modelo */
+  object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer */
+  border-radius: 5px; /* O modelo tem cantos levemente arredondados */
+}
+
+.description {
+  text-align: center;
+  padding-top: 5rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600; /* No modelo a descrição é mais leve que o título */
+  /* margin-left: auto;
+  margin-right: auto; */
+  font-size: 1.1rem; /* Tamanho legível */
+  line-height: 1.8; /* Altura da linha generosa para "arejar" o texto */
+
+  /* O SEGREDO DO FORMATO: */
+  max-width: 800px; /* Impede que o texto vá até a borda da tela */
+  margin: 0 auto 40px;
+}
+
+#button-destiny {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 7rem;
+}
+
+/* Essa classe garante que NADA no site ultrapasse essa largura */
+.container {
+  margin-top: 10rem; /* Aumentei um pouco para o desnível não bater no título */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 3 colunas iguais */
+  gap: 20px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.image-side {
+  width: 100%;
+  height: 350px; /* Define uma altura fixa para não ocupar a tela toda */
+  object-fit: cover; /* Faz a imagem cortar sem esticar ou achatar */
+  border-radius: 5px;
+}
+
+.container div:nth-child(2) {
+  transform: translateY(-30px); /* Move 50px para cima */
+}
+
+.articles h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.title-container {
+  padding-top: 1.5rem;
+}
+
+.articles p {
+  line-height: 1.6;
+}
+
+.p-article {
+  font-family: "Montserrat", sans-serif;
+}
+
+#description-article {
+  margin-bottom: 1rem;
+}
+
+.turn-section {
+  margin-top: 10rem;
+  margin-bottom: 3rem;
+}
+
+.turn-section {
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  .informations {
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .information {
+    color: #2ed3f6;
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+.turn-section h2 {
+  font-size: 3rem;
+  font-weight: bolder;
+  margin-bottom: 1.5rem;
+}
+
+.p-turn-section {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem; /* Tamanho legível */
+  line-height: 1.8; /* Altura da linha generosa para "arejar" o texto */
+  font-weight: 600;
+  /* O SEGREDO DO FORMATO: */
+  max-width: 800px; /* Impede que o texto vá até a borda da tela */
+  margin: 0 auto 40px;
+  padding-bottom: 2rem;
+}
+
+.button-div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.button-div button {
+  padding: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2rem;
+  background-color: #000000;
+  border-radius: 5px;
+  border-color: #2ed3f6;
+  color: #2ed3f6;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: 0.3s;
+  margin-top: 0.5rem;
+}
+
+.button-div button:hover {
+  background-color: #2ed3f6;
+  color: #000;
+}
+
+.figures {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 4rem;
+  max-width: 1100px; /* Mesma largura que usamos na galeria de cima */
+  margin: 0 auto; /* Centraliza o bloco na tela */
+  padding: 0 20px;
+}
+
+.figures-img {
+  width: 100%;
+  height: 500px; /* Define uma altura fixa para não ocupar a tela toda */
+  object-fit: cover; /* Faz a imagem cortar sem esticar ou achatar */
+  border-radius: 5px;
+}
+
+.figures figure:nth-child(2) {
+  transform: translateY(-30px); /* Move 50px para cima */
+}
+
+.figures figure:nth-child(4) {
+  transform: translateY(-30px); /* Move 50px para cima */
+}
+
+figure img {
+  filter: brightness(0.9) contrast(1.1);
+}
+figure img:hover {
+  filter: brightness(1); /* Acende a foto no hover */
+}
+
+.articles img {
+  filter: brightness(0.9) contrast(1.1);
+}
+.articles img:hover {
+  filter: brightness(1); /* Acende a foto no hover */
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Empurra os 3 blocos para as extremidades */
+  padding: 63px 5%; /* Cria o recuo lateral que o modelo tem */
+  background-color: #000; /* Garante o fundo preto puro */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.list-footer {
+  display: flex;
+  gap: 30px; /* Aumentei o espaço entre os links como no modelo */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- RESET BÁSICO (Para garantir o fundo preto) --- */
+.contact-section {
+  background-color: #000;
+  color: #fff;
+  padding: 100px 5%;
+
+  /* A MÁGICA DO GRID */
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Cria 2 colunas iguais */
+  column-gap: 80px; /* Espaço entre o texto e o formulário */
+  row-gap: 50px; /* Espaço entre o título e o conteúdo */
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* --- TÍTULO (OCUPA A LARGURA TODA) --- */
+.contact-section h2 {
+  grid-column: 1 / -1; /* Manda o título atravessar de ponta a ponta */
+  text-align: center;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: normal;
+  letter-spacing: 2px;
+  padding-bottom: 2rem;
+}
+
+/* --- PARÁGRAFO (LADO ESQUERDO) --- */
+.contact-section p {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: #ddd;
+}
+
+/* --- FORMULÁRIO (LADO DIREITO) --- */
+#contact-form {
+  display: flex;
+  flex-direction: column; /* Empilha os inputs */
+  gap: 20px;
+}
+
+/* Esconder as labels visualmente para ficar igual ao modelo (Minimalista) */
+#contact-form label {
+  display: none;
+}
+
+/* ESTILO DOS INPUTS (CAIXA TRANSPARENTE) */
+#contact-form input {
+  width: 100%;
+  background-color: transparent; /* Remove o fundo branco */
+  border: 1px solid #fff; /* Borda branca fina */
+  padding: 15px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+#contact-form input:focus {
+  border-color: #2ed3f6; /* Cor verde quando clica */
+}
+
+/* ESTILO DO PLACEHOLDER (O texto 'Seu nome' dentro da caixa) */
+#contact-form input::placeholder {
+  color: #bbb;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* --- BOTÃO (ALINHADO À DIREITA) --- */
+#contact-form button {
+  /* MUDANÇA 1: Largura automática (só ocupa o espaço do texto) */
+  width: auto;
+
+  /* OU, se preferir um tamanho fixo específico, use: width: 200px; */
+
+  /* MUDANÇA 2: Garante que ele vá para a direita no flexbox */
+  align-self: center;
+
+  /*align-self: flex-end;/* /* Joga o botão para o canto direito do formulário */
+  background: transparent;
+  border: 1px solid #2ed3f6;
+  color: #2ed3f6;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+#contact-form button:hover {
+  background-color: #2ed3f6;
+  color: #000;
+}
+
+#status-envio {
+  /* 1. Centraliza o texto dentro do parágrafo */
+  text-align: center;
+
+  padding-top: 0.5rem;
+  line-height: 1.6; /* Dá um respiro se o texto quebrar em 2 linhas */
+  font-size: 1.3rem;
+  display: none; /* Começa escondido */
+}
+
+.sucesso {
+  color: #00ffaa !important; /* VERDE NEON FORÇADO */
+  display: block !important;
+}
+
+.erro {
+  color: #ff3333 !important; /* VERMELHO ALERTA FORÇADO */
+  display: block !important;
+}
+
+/* --- FUNDO E ESTRUTURA --- */
+.testimonials {
+  /* 1. O OVERLAY: Camada preta transparente (0.7) */
+  /* 2. A IMAGEM: url('img/praia.jpg') */
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/praia.jpg");
+
+  background-size: cover; /* Cobre tudo sem distorcer */
+  background-position: center; /* Centraliza a foto */
+  background-attachment: fixed; /* Efeito Parallax (opcional, dá um charme) */
+  padding: 42px 5%; /* Altura e respiro lateral */
+  color: #fff;
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 80px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* --- GRID (DIVISÃO DA TELA) --- */
+.grid-layout {
+  display: grid;
+  /* Coluna da esquerda (1.5x) maior que a da direita (1x) */
+  grid-template-columns: 1.5fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* --- LADO ESQUERDO (DESTAQUE) --- */
+.depoimento-destaque blockquote {
+  /* font-family: "Sua-Fonte-Viking", sans-serif; */
+  font-size: 2.2rem; /* Letra bem grande */
+  line-height: 1.4;
+  margin-bottom: 20px;
+  border-left: 4px solid #2ed3f6; /* Detalhe verde na lateral igual site gringo */
+  padding-left: 20px;
+}
+
+.depoimento-destaque cite {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ccc;
+  font-style: normal;
+  display: block; /* Garante que fique embaixo do texto */
+  margin-top: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* --- LADO DIREITO (LISTA) --- */
+.lista-comentarios {
+  display: flex;
+  flex-direction: column;
+  gap: 50px; /* Espaço entre o João e o Biruleibe */
+}
+
+.mini-depoimento p {
+  font-size: 1.1rem;
+  color: #ddd;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.mini-depoimento cite {
+  color: #2ed3f6; /* Destaque verde no nome */
+  font-weight: bold;
+  font-style: normal;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ==========================================
+   RODAPÉ - COMPORTAMENTO HÍBRIDO (PC x MOBILE)
+   ========================================== */
+/* 1. Esconde a caixinha feia do sistema em absolutamente todas as telas */
+.footer-submenu-checkbox {
+  display: none !important;
+}
+
+/* ==========================================
+   DESKTOP (PC) - APENAS HOVER (Mouse por cima)
+   ========================================== */
+@media (min-width: 769px) {
+  /* No PC, a setinha volta a ser só um enfeite (desativa o clique dela) */
+  .footer-submenu-seta {
+    cursor: default;
+    pointer-events: none; /* A MÁGICA: O PC ignora o clique na setinha! */
+    padding: 0;
+  }
+
+  /* Garante que a caixa preta fique escondida por padrão */
+  #content-dropdown {
+    display: none;
+  }
+
+  /* Quando o mouse passa por cima de "Expedições", a caixa preta aparece */
+  .dropdown:hover #content-dropdown {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  /* Quando o mouse passa por cima, a setinha dá o giro suave */
+  .dropdown:hover .footer-submenu-seta .arrow {
+    transform: rotate(180deg);
+  }
+}
+
+/* ==========================================
+   CELULAR (Mobile) - APENAS CLIQUE NA SETA
+   ========================================== */
+@media (max-width: 768px) {
+  /* Prepara a setinha para ser clicável pelo dedo */
+  .footer-submenu-seta {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px !important; /* Deixa gordinha pro dedo não errar */
+    margin-top: 2px;
+  }
+
+  /* Quando a seta NÃO está clicada (fechada), esconde a caixa */
+  .footer-submenu-checkbox:not(:checked) ~ #content-dropdown {
+    display: none !important;
+  }
+
+  /* Quando a seta FOI clicada (aberta), força a caixa a aparecer */
+  .footer-submenu-checkbox:checked ~ #content-dropdown {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  /* Gira a setinha para cima quando o menu abrir */
+  .footer-submenu-checkbox:checked ~ .footer-submenu-seta .arrow {
+    transform: rotate(225deg) !important;
+  }
+
+  /* Volta a setinha para baixo quando fechar */
+  .footer-submenu-checkbox:not(:checked) ~ .footer-submenu-seta .arrow {
+    transform: rotate(45deg) !important;
+  }
+}
+
+/* No PC, garante que o hover antigo continue girando a seta nova */
+@media (min-width: 769px) {
+  .dropdown:hover .footer-submenu-seta .arrow {
+    transform: rotate(225deg);
+  }
+}
+
+/* ========================================== */
+/* RESPONSIVO - TABLETS E NOTEBOOKS PEQUENOS  */
+/* ========================================== */
+@media (max-width: 1150px) {
+  .gallery-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 105px;
+  }
+
+  .gallery-grid figure:nth-child(2) {
+    transform: translateY(0px);
+  }
+
+  .primaryfigures {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .figures {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 105px;
+  }
+
+  .figures-img {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 105px;
+  }
+
+  .container div:nth-child(2) {
+    transform: translateY(0px);
+  }
+
+  .articles {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .contact-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 105px;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .grid-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 105px;
+  }
+
+  .lista-comentarios {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+/* ==========================================
+   A MÁGICA NO CELULAR (Até 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  /* --- 1. O HAMBÚRGUER E A TELA PRETA (Menu Principal) --- */
+  .menu-hamburguer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .menu-hamburguer .linha {
+    height: 2px;
+    width: 100%;
+    background-color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .list-header {
+    position: absolute;
+    top: 70px; /* Ajuste conforme a altura do seu cabeçalho */
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    flex-direction: column;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    z-index: 998;
+  }
+
+  .list-header li {
+    width: 100%;
+    border-bottom: 1px solid #333;
+    text-align: left; /* Textos alinhados à esquerda ficam mais chiques */
+  }
+
+  .list-header li a {
+    display: block;
+    padding: 20px;
+  }
+
+  /* Abre o Menu Principal e anima o X */
+  .menu-checkbox:checked ~ .list-header {
+    max-height: 800px; /* Grande o suficiente para caber tudo */
+  }
+  .menu-checkbox:checked ~ .menu-hamburguer .linha:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .menu-checkbox:checked ~ .menu-hamburguer .linha:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-checkbox:checked ~ .menu-hamburguer .linha:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* --- 2. O SUBMENU DE EXPEDIÇÕES (A Setinha) --- */
+  .list-header .dropdown-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .list-header .dropdown-header .dropbtn {
+    width: 75%;
+    padding: 20px;
+    border-bottom: none;
+  }
+
+  .submenu-seta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 60px;
+    cursor: pointer;
+    border-left: 1px solid #333;
+    transition: transform 0.3s ease;
+  }
+
+  .list-header .dropdown-content {
+    position: static;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #111;
+  }
+
+  .list-header .dropdown-content a {
+    padding: 15px 20px;
+    font-size: 0.9em;
+    color: #ccc;
+    border-bottom: 1px solid #222;
+  }
+
+  /* Abre o Submenu e gira a setinha */
+  .submenu-checkbox:checked ~ .dropdown-content {
+    display: flex;
+  }
+  .submenu-checkbox:checked ~ .submenu-seta {
+    transform: rotate(180deg);
+  }
+
+  /* ==========================================
+     TIRANDO A SETA DUPLICADA NO MOBILE
+     ========================================== */
+  .list-header .dropbtn .arrow {
+    display: none !important; /* Aniquila a setinha grudada no texto apenas no celular */
+  }
+  /* ==========================================
+     RODAPÉ NO CELULAR
+     ========================================== */
+
+  /* 1. Reduz o buraco entre as palavras */
+  .list-footer {
+    gap: 12px !important; /* Diminui os 30px originais para caber na tela */
+    justify-content: center; /* Mantém a turma toda centralizada */
+    flex-wrap: wrap; /* Trava de segurança: se a tela for um celular muito fininho, ele quebra a linha com elegância */
+  }
+
+  /* 2. Encolhe as letras */
+  .list-footer li a,
+  .list-footer .dropbtn {
+    font-size: 12px; /* Tamanho de bula de remédio, mas chique e legível kkkk */
+    padding: 5px 0;
+  }
+
+  /* 3. Salva a setinha do abismo */
+  .list-footer .dropbtn {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Gruda a setinha na palavra */
+    white-space: nowrap; /* É a regra que diz ao navegador: "Proibido jogar a seta pra baixo!" */
+  }
+
+  /* ==========================================
+     RODAPÉ - EMPILHANDO LINKS E REDES SOCIAIS
+     ========================================== */
+  footer {
+    flex-direction: column !important; /* Muda de linha para coluna */
+    align-items: center !important; /* Centraliza tudo no meio da tela */
+    gap: 25px !important; /* O espaço exato entre a linha de textos e os ícones */
+    padding-top: 30px !important; /* Dá um respiro elegante na parte de cima */
+    padding-bottom: 30px !important; /* Dá um respiro na parte de baixo */
+  }
+
+  /* Garante que os textos fiquem perfeitamente no centro */
+  .list-footer {
+    justify-content: center !important;
+  }
+
+  /* ==========================================
+     NIVELAMENTO PERFEITO DO RODAPÉ
+     ========================================== */
+
+  /* Alinha todas as palavras pela base (linha invisível embaixo das letras) */
+  .list-footer {
+    align-items: baseline !important;
+  }
+
+  /* Tira qualquer "empurrão" para baixo que a setinha estava dando */
+  .footer-submenu-seta {
+    margin-top: 0 !important;
+  }
+}
+
+/*CSS DA ABA FAQ */ /* --- Ajuste Geral do Container (para alinhar com a parte de cima) --- */
+.section-container {
+  max-width: 1200px; /* Aumente de 1100 para 1200 se quiser mais largo */
+  width: 55%; /* Garante margem em telas menores */
+  margin: 0 auto; /* Centraliza */
+  margin-top: 10rem;
+}
+
+/* --- Ajuste do Grid do FAQ --- */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas de 50% */
+  column-gap: 60px; /* Espaço entre as colunas */
+  row-gap: 50px;
+  width: 100%; /* Força o grid a ocupar a caixa toda */
+}
+
+#grid-faq {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* --- O PULO DO GATO (Desbloqueando a largura do texto) --- */
+.faq-item p {
+  /* É provável que ele esteja herdando um max-width: 400px de outro lugar.
+       Vamos sobrescrever isso: */
+  max-width: 100% !important; /* Ocupa a coluna inteira */
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ccc;
+  text-align: left; /* Alinha à esquerda para leitura natural */
+}
+
+/* Título da pergunta */
+.faq-item h3 {
+  color: #2ed3f6; /* Azul ciano (ou use seu verde #00ffaa) */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  padding-bottom: 1.5rem;
+}
+
+#fq-section {
+  padding-bottom: 8rem;
+}
+
+#testimonial {
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/carro-rodape.jpg");
+  background-attachment: fixed; /* Efeito Parallax (opcional, dá um charme) */
+}
+
+#img-container div:nth-child(2) {
+  transform: translateY(-20px); /* Move 50px para cima */
+}
+
+@media (max-width: 1150px) {
+  .faq-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 105px;
+  }
+
+  .faq-item {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  #side-image {
+    object-position: top;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 4rem;
+  }
+}
+/* ABA DE CONTATOS */
+
+#text {
+  background-color: #000;
+  border-radius: 5px;
+  width: 100%;
+  background-color: transparent; /* Remove o fundo branco */
+  border: 1px solid #fff; /* Borda branca fina */
+  padding: 15px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+#text:hover {
+  border-color: #2ed3f6;
+}
+
+#testimoniall {
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/cachoeira-contatos.jpg");
+  background-attachment: fixed; /* Efeito Parallax (opcional, dá um charme) */
+  /* background: url("../img/test1.jpg"); */
+}
+
+#contactaba {
+  padding: 13rem;
+  max-width: 1600px;
+}
+
+#contactaba {
+  p {
+    font-size: 1.7rem;
+  }
+}
+
+.link {
+  color: #2ed3f6;
+}
+
+.link:hover {
+  background-color: #2ed3f6;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  #contactaba {
+    padding: 5rem;
+    max-width: 1600px;
+  }
+}
+
+/*ABA DE EXPEDIÇÃO 1 */
+
+.tour-landing-page {
+  padding: px 0; /* Espaço para não colar no menu lá em cima */
+  color: #fff;
+}
+
+#container-expedicao {
+  margin-top: 5rem;
+}
+
+#cta-btn {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.tour-landing-list {
+  margin-top: 2rem;
+  padding: 0px 0px 0px 24px;
+}
+
+.list-expediction {
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+}
+
+.description-expediction {
+  padding-top: 2rem;
+  /* padding-bottom: 2rem; */
+  font-family: "Montserrat", sans-serif;
+}
+
+.description-expediction {
+  /* O SEGREDO: Ocupa da primeira linha do grid até a última (-1) */
+  grid-column: 1 / -1;
+
+  /* Garante que ocupe todo o espaço liberado */
+  width: 100%;
+  max-width: 100% !important;
+
+  /* Um respiro em cima para não colar na imagem e na lista */
+  /* margin-top: 40px; */
+
+  color: #ccc;
+  line-height: 1.6;
+}
+
+#container-expedicao div:nth-child(2) {
+  transform: none;
+}
+
+#tour-landing-image {
+  /* 1. Largura Fluida: Ocupa 100% da coluna da direita do Grid */
+  width: 100%;
+
+  /* 2. Altura Fixa (ou Proporcional): 600px dá aquele ar de pôster vertical */
+  height: 505px;
+
+  /* 3. A MÁGICA: Garante que a foto não seja esmagada ou esticada */
+  object-fit: cover;
+
+  /* 4. Arredondamento leve igual ao modelo */
+  border-radius: 4px;
+}
+
+#img-exdiction {
+  height: 505px;
+}
+
+#btn-cta-expedicao {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 1rem;
+}
+
+#list-expediction-landing {
+  margin-top: 0;
+}
+
+.article-exp-img {
+  position: relative;
+
+  /* O PULO DO GATO: O limite e o centro vêm pro Pai! */
+  max-width: 1060px;
+  margin-left: auto; /* Centraliza na horizontal */
+  margin-right: auto; /* Centraliza na horizontal */
+
+  /* Trocamos padding por margin para o top: 50% das setas bater EXATAMENTE no meio da foto */
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+}
+
+.article-exp-img img {
+  width: 100%; /* A imagem agora preenche os 1060px do Pai certinho */
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+  display: block; /* Remove aquele "espacinho fantasma" que sobra debaixo de imagens */
+}
+
+#imagem-carrossel {
+  transition: opacity 0.3s ease-in-out;
+}
+.fade-out {
+  opacity: 0.2;
+}
+
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Crava exatamente no meio vertical */
+
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+
+  /* Centraliza o ícone dentro da bolinha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seta:hover {
+  background-color: rgba(0, 173, 239, 0.9); /* O seu azul ciano */
+  border-color: #00adef;
+}
+
+.seta-esq {
+  left: 15px;
+} /* Descola 15px da borda esquerda */
+.seta-dir {
+  right: 15px;
+} /* Descola 15px da borda direita */
+
+#testimonial-exp1 {
+  margin-top: 6rem;
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/img-rodape-exp1.jpg");
+  background-attachment: fixed; /* Efeito Parallax (opcional, dá um charme) */
+  /* background: url("../img/test1.jpg"); */
+}
+
+/*EXPEDIÇÃO #2 */
+
+#testimonial-exp2 {
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/img-rodape-exp2.jpg");
+  background-attachment: fixed;
+}
+
+/*EXPEDIÇÃO #3 */
+
+#testimonial-exp3 {
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/img-rodape-exp3.jpg");
+  background-attachment: fixed;
+  /* background-size: cover;
+  background-position: center;
+  background-attachment: fixed; */
+}
+
+/*EXPEDICAO*/
+
+#main-section {
+  margin-top: 4rem;
+}
+
+#testimonial-initial {
+  background:
+    linear-gradient(rgba(5, 20, 40, 0.7), rgba(2, 10, 20, 0.9)),
+    url("../img/img-finale-expedicao.jpg");
+  background-attachment: fixed;
+}
+
+@media (max-width: 1150px) {
+  .figures figure:nth-child(2) {
+    transform: translateY(0px);
+  }
+
+  .figures figure:nth-child(4) {
+    transform: translateY(0px);
+  }
+}
