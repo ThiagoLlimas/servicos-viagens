@@ -38,6 +38,28 @@
 
 ---
 
+---
+
+## ⚙️ Como Executar o Projeto Localmente
+
+1. Clone este repositório:
+```bash
+git clone https://github.com/ThiagoLLimas/servicos-viagens.git
+```
+Entre na pasta do projeto:
+
+```Bash
+cd servicos-viagens
+```
+Execução:
+Como o projeto foi desenvolvido em Vanilla Stack (HTML, CSS e JS puros), você não precisa instalar nenhuma dependência!
+
+Basta abrir o arquivo index.html diretamente no seu navegador, ou:
+
+Utilizar a extensão Live Server no seu editor de código para rodar o projeto com recarregamento automático.
+
+---
+
 ## 👤 Desenvolvido por
 
 **Thiago Henrique Lima de Paula**  
