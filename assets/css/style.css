@@ -1162,7 +1162,11 @@ footer {
   color: #fff;
 }
 
-#container-expedicao {
+#container-expedicao-two {
+  margin-top: 5rem;
+}
+
+#container-expedicao-three {
   margin-top: 5rem;
 }
 
@@ -1202,9 +1206,14 @@ footer {
   line-height: 1.6;
 }
 
-#container-expedicao div:nth-child(2) {
+#container-expedicao-two div:nth-child(2) {
   transform: none;
 }
+
+#container-expedicao-three div:nth-child(2) {
+  transform: none;
+}
+
 
 #tour-landing-image {
   /* 1. Largura Fluida: Ocupa 100% da coluna da direita do Grid */
