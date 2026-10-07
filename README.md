@@ -1,6 +1,6 @@
 # 🌋 Entre no Coração da Islândia — Serviços de Viagens
 
-> Landing page premium e multipáginas desenvolvida para agência de turismo especializada em expedições exclusivas na Islândia. O projeto foca na apresentação de ambientes naturais deslumbrantes, lazer, observação da fauna local, expedições automotivas e eventos organizados em grupo.
+> Landing page premium e multipáginas desenvolvida focada na apresentação de ambientes naturais deslumbrantes, lazer, observação da fauna local, expedições automotivas e eventos organizados em grupo.
 
 ---
 
